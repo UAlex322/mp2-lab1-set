@@ -309,3 +309,37 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+// MY TESTS
+
+TEST(TBitField, can_create_bitfield_from_binary_string) {
+    ASSERT_NO_THROW(TBitField bf("101010"));
+}
+
+TEST(TBitField, throws_when_create_bitfield_from_invalid_string) {
+    ASSERT_ANY_THROW(TBitField bf("1 0"));
+}
+
+TEST(TBitField, bitfield_has_correct_input_operator) {
+    TBitField bf1, bf2(5);
+    std::string s;
+    std::stringstream ss;
+
+    ss << "11010";
+    ss >> bf1;
+    bf2.SetBit(0); bf2.SetBit(1); bf2.SetBit(3); // bf2 = 11010
+
+    EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, bitfield_has_correct_output_operator) {
+    TBitField bf(5);
+    std::string s1("10101"), s2;
+    std::stringstream ss;
+
+    bf.SetBit(0); bf.SetBit(2); bf.SetBit(4); // bf = 10101
+    ss << bf;
+    s2 = ss.str();
+
+    EXPECT_EQ(s1, s2);
+}
