@@ -25,8 +25,9 @@ private:
   int   GetMemIndex(const int n) const; // индекс в pМем для бита n       (#О2)
   TELEM GetMemMask (const int n) const; // битовая маска для бита n       (#О3)
 public:
-  TBitField(int len);                //                                   (#О1)
+  TBitField(int len = 0);            //                                   (#О1)
   TBitField(const TBitField &bf);    //                                   (#П1)
+  TBitField(const std::string &s);	 // Конструктор от бинарной строки (из нулей и единиц)
   ~TBitField();                      //                                    (#С)
 
   // доступ к битам
@@ -36,8 +37,8 @@ public:
   int  GetBit(const int n) const; // получить значение бита               (#Л1)
 
   // битовые операции
-  int operator==(const TBitField &bf) const; // сравнение                 (#О5)
-  int operator!=(const TBitField &bf) const; // сравнение
+  bool operator==(const TBitField &bf) const; // сравнение                 (#О5)
+  bool operator!=(const TBitField &bf) const; // сравнение
   TBitField& operator=(const TBitField &bf); // присваивание              (#П3)
   TBitField  operator|(const TBitField &bf); // операция "или"            (#О6)
   TBitField  operator&(const TBitField &bf); // операция "и"              (#Л2)
