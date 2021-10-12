@@ -295,3 +295,41 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+// MY TESTS
+
+TEST(TSet, can_fill_set_by_input_operator) {
+	TSet set(10), expSet(10);
+	std::stringstream ss("1 3 7 9");
+
+	ss >> set;
+	expSet.InsElem(1);
+	expSet.InsElem(3);
+	expSet.InsElem(7);
+	expSet.InsElem(9);
+
+	EXPECT_EQ(set, expSet);
+}
+
+TEST(TSet, set_input_operator_throws_exception_for_incorrect_input) {
+	TSet set(10);
+	std::stringstream ss("1 10 5");
+
+	ASSERT_ANY_THROW(ss >> set);
+}
+
+TEST(TSet, set_has_correct_output_operator) {
+	TSet set(10);
+	std::string s = "1 2 5 7 8 ";
+	std::stringstream ss;
+
+	set.InsElem(1);
+	set.InsElem(2);
+	set.InsElem(5);
+	set.InsElem(7);
+	set.InsElem(8);
+	ss << set;
+
+	EXPECT_EQ(ss.str(), s);
+
+}
