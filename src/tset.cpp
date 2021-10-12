@@ -112,14 +112,22 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    istr >> s.BitField;
+    uint64_t elem;
+    while (istr >> elem) {
+        if (elem >= s.MaxPower) throw runtime_error("TSet operator>>: can't element bigger or equal to MaxPower");
+        s.InsElem(elem);
+    }
 
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    ostr << s.BitField;
+    for (size_t i = 0; i < s.MaxPower; ++i)
+        if (s.IsMember(i)) {
+            ostr << i;
+            if (i+1 < s.MaxPower) ostr << " ";
+        }
 
     return ostr;
 }
