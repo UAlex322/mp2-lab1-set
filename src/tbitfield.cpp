@@ -7,6 +7,7 @@
 
 #include "tbitfield.h"
 #include <string>
+#include <algorithm>
 
 #define MEM_SIZE(BitLen) ((BitLen)+8*sizeof(TELEM)-1)/(8*sizeof(TELEM))
 
