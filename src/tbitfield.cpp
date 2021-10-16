@@ -81,7 +81,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 	if (n < 0) 
 		throw runtime_error("ClrBit: negative index is forbidden");
 	if (n >= BitLen) 
-		throw runtime_error("SetBit: too large index is forbidden");
+		throw runtime_error("ClrBit: too large index is forbidden");
 
 	pMem[GetMemIndex(n)] &= ~GetMemMask(n);
 }
@@ -91,7 +91,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 	if (n < 0) 
 		throw runtime_error("GetBit: negative index is forbidden");
 	if (n >= BitLen) 
-		throw runtime_error("SetBit: too large index is forbidden");
+		throw runtime_error("GetBit: too large index is forbidden");
 
 	return (pMem[GetMemIndex(n)] & GetMemMask(n)) >> (n % (8*sizeof(TELEM)));
 }
